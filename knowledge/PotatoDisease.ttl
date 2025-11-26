@@ -1,0 +1,479 @@
+@prefix : <http://example.org/potato#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://example.org/potato> a owl:Ontology ;
+  rdfs:label "Potato diseases, disorders and deficiencies ontology (from UMass, AHDB, INRA, Maurya et al.)"@en .
+
+:Plant a owl:Class ;
+  rdfs:label "Plant"@en .
+
+:PotatoPlant a owl:Class ;
+  rdfs:subClassOf :Plant ;
+  rdfs:label "Potato plant"@en .
+
+:PotatoDisease a owl:Class ;
+  rdfs:label "Potato disease or disorder"@en .
+
+:ParasiticDisease a owl:Class ;
+  rdfs:subClassOf :PotatoDisease ;
+  rdfs:label "Parasitic disease"@en .
+
+:FungalDisease a owl:Class ;
+  rdfs:subClassOf :ParasiticDisease ;
+  rdfs:label "Fungal / fungal-like disease"@en .
+
+:BacterialDisease a owl:Class ;
+  rdfs:subClassOf :ParasiticDisease ;
+  rdfs:label "Bacterial or phytoplasma disease"@en .
+
+:VirusDisease a owl:Class ;
+  rdfs:subClassOf :ParasiticDisease ;
+  rdfs:label "Virus disease"@en .
+
+:ViroidDisease a owl:Class ;
+  rdfs:subClassOf :ParasiticDisease ;
+  rdfs:label "Viroid disease"@en .
+
+:NematodeDisease a owl:Class ;
+  rdfs:subClassOf :ParasiticDisease ;
+  rdfs:label "Nematode-related disease"@en .
+
+:NonParasiticDisorder a owl:Class ;
+  rdfs:subClassOf :PotatoDisease ;
+  rdfs:label "Non-parasitic disorder"@en .
+
+:AccidentalDisorder a owl:Class ;
+  rdfs:subClassOf :NonParasiticDisorder ;
+  rdfs:label "Accidental / abiotic disorder"@en .
+
+:PhysiologicalDisorder a owl:Class ;
+  rdfs:subClassOf :NonParasiticDisorder ;
+  rdfs:label "Physiological disorder"@en .
+
+:ExternalPhysiologicalDisorder a owl:Class ;
+  rdfs:subClassOf :PhysiologicalDisorder ;
+  rdfs:label "External physiological disorder"@en .
+
+:InternalPhysiologicalDisorder a owl:Class ;
+  rdfs:subClassOf :PhysiologicalDisorder ;
+  rdfs:label "Internal physiological disorder"@en .
+
+:MineralDeficiencyDisorder a owl:Class ;
+  rdfs:subClassOf :PhysiologicalDisorder ;
+  rdfs:label "Mineral deficiency / toxicity related disorder"@en .
+
+:Symptom a owl:Class ;
+  rdfs:label "Symptom"@en .
+
+:LeafSymptom a owl:Class ;
+  rdfs:subClassOf :Symptom ;
+  rdfs:label "Leaf symptom"@en .
+
+:StemSymptom a owl:Class ;
+  rdfs:subClassOf :Symptom ;
+  rdfs:label "Stem symptom"@en .
+
+:TuberSymptom a owl:Class ;
+  rdfs:subClassOf :Symptom ;
+  rdfs:label "Tuber symptom"@en .
+
+:ControlAction a owl:Class ;
+  rdfs:label "Control or management action"@en .
+
+:hasSymptom a owl:ObjectProperty ;
+  rdfs:range :Symptom ;
+  rdfs:label "has symptom"@en .
+
+:hasDisease a owl:ObjectProperty ;
+  rdfs:range :PotatoDisease ;
+  rdfs:label "has disease"@en .
+
+:indicatesDisease a owl:ObjectProperty ;
+  rdfs:range :PotatoDisease ;
+  rdfs:label "indicates disease"@en .
+
+:hasControlAction a owl:ObjectProperty ;
+  rdfs:range :ControlAction ;
+  rdfs:label "has control action"@en .
+
+:hasName a owl:DatatypeProperty ;
+  rdfs:domain owl:Thing ;
+  rdfs:range rdfs:Literal ;
+  rdfs:label "human-readable name"@en .
+
+:hasAgentNote a owl:DatatypeProperty ;
+  rdfs:domain owl:Thing ;
+  rdfs:range rdfs:Literal ;
+  rdfs:label "short note about causal agent"@en .
+
+:hasDescription a owl:DatatypeProperty ;
+  rdfs:domain owl:Thing ;
+  rdfs:range rdfs:Literal ;
+  rdfs:label "description"@en .
+
+:severityLevel a owl:DatatypeProperty ;
+  rdfs:domain owl:Thing ;
+  rdfs:range rdfs:Literal ;
+  rdfs:label "severity level"@en .
+
+:BlackDot a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Black dot"@en ;
+  :hasAgentNote "Colletotrichum coccodes"@en .
+
+:EarlyBlight a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Early blight / Brown spots"@en ;
+  :hasAgentNote "Alternaria spp. (commonly A. solani)"@en .
+
+:FusariumDryRotOrWilt a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Fusarium dry rot / wilt"@en ;
+  :hasAgentNote "Fusarium spp."@en .
+
+:Gangrene a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Gangrene"@en ;
+  :hasAgentNote "Phoma exigua var. exigua / foveata"@en .
+
+:GreyMould a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Grey mould / Gray mold"@en ;
+  :hasAgentNote "Botrytis cinerea"@en .
+
+:LateBlight a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Late blight"@en ;
+  :hasAgentNote "Phytophthora infestans"@en ;
+  :severityLevel "high"@en .
+
+:LeakRot a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Leak rot / Watery wound rot"@en ;
+  :hasAgentNote "Pythium spp."@en .
+
+:PinkRot a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Pink rot"@en ;
+  :hasAgentNote "Phytophthora erythroseptica"@en .
+
+:PotatoWartDisease a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Potato wart disease / Black wart"@en ;
+  :hasAgentNote "Synchytrium endobioticum"@en .
+
+:PowderyScab a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Powdery scab"@en ;
+  :hasAgentNote "Spongospora subterranea"@en .
+
+:SilverScurf a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Silver scurf"@en ;
+  :hasAgentNote "Helminthosporium (Helg.) solani"@en .
+
+:SkinSpot a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Skin spot"@en ;
+  :hasAgentNote "Polyscytalium pustulans"@en .
+
+:StalkBreakWhiteMould a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Stalk break / White mould"@en ;
+  :hasAgentNote "Sclerotinia spp."@en .
+
+:StemCankerBlackScurf a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Stem canker / Black scurf"@en ;
+  :hasAgentNote "Rhizoctonia solani"@en .
+
+:StemRotSouthernBlight a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Stem rot / Southern blight"@en ;
+  :hasAgentNote "Sclerotium rolfsii"@en .
+
+:VerticilliumWilt a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Verticillium wilt"@en ;
+  :hasAgentNote "Verticillium spp."@en .
+
+:VioletRootRot a owl:NamedIndividual , :FungalDisease ;
+  :hasName "Violet root rot"@en ;
+  :hasAgentNote "Rhizoctonia crocorum"@en .
+
+:BacterialWiltBrownRot a owl:NamedIndividual , :BacterialDisease ;
+  :hasName "Bacterial wilt / Brown rot"@en ;
+  :hasAgentNote "Ralstonia solanacearum"@en .
+
+:BlacklegSoftRot a owl:NamedIndividual , :BacterialDisease ;
+  :hasName "Blackleg and Soft rot"@en ;
+  :hasAgentNote "Dickeya spp., Pectobacterium spp."@en .
+
+:CommonScabNettedScab a owl:NamedIndividual , :BacterialDisease ;
+  :hasName "Common scab and Netted scab"@en ;
+  :hasAgentNote "Streptomyces spp."@en .
+
+:RingRot a owl:NamedIndividual , :BacterialDisease ;
+  :hasName "Ring rot"@en ;
+  :hasAgentNote "Clavibacter michiganensis subsp. sepedonicus"@en .
+
+:StolburPhytoplasmas a owl:NamedIndividual , :BacterialDisease ;
+  :hasName "Stolbur and other phytoplasmas"@en ;
+  :hasAgentNote "Candidatus Phytoplasma spp."@en .
+
+:ZebraChipDisease a owl:NamedIndividual , :BacterialDisease ;
+  :hasName "Zebra chip disease"@en ;
+  :hasAgentNote "Candidatus Liberibacter solanacearum"@en .
+
+:AlfalfaMosaicVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Alfalfa mosaic virus (AMV)"@en .
+
+:CucumberMosaicVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Cucumber mosaic virus (CMV)"@en .
+
+:PepinoMosaicVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Pepino mosaic virus (PepMV)"@en .
+
+:PotatoAucubaMosaicVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato aucuba mosaic virus (PAMV)"@en .
+
+:PotatoLeafrollVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato leaf roll virus (PLRV)"@en .
+
+:PotatoMopTopVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato mop-top virus (PMTV)"@en .
+
+:PotatoVirusA a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato virus A (PVA)"@en .
+
+:PotatoVirusM a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato virus M (PVM)"@en .
+
+:PotatoVirusS a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato virus S (PVS)"@en .
+
+:PotatoVirusX a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato virus X (PVX)"@en .
+
+:PotatoVirusV a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato virus V (PVV)"@en .
+
+:PotatoVirusY a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Potato virus Y (PVY)"@en .
+
+:PotatoVirusY_NTN a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Necrosis Potato virus Y NTN (PVYNTN)"@en .
+
+:TomatoBlackRingVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Tomato black ring virus (TBRV)"@en .
+
+:TomatoMosaicVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Tomato mosaic virus (ToMV)"@en .
+
+:TobaccoNecrosisVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Tobacco necrosis virus (TNV)"@en .
+
+:TobaccoRattleVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Tobacco rattle virus (TRV)"@en .
+
+:TomatoSpottedWiltVirus a owl:NamedIndividual , :VirusDisease ;
+  :hasName "Tomato spotted wilt virus (TSWV)"@en .
+
+:PotatoSpindleTuberViroid a owl:NamedIndividual , :ViroidDisease ;
+  :hasName "Potato spindle tuber viroid (PSTVd)"@en .
+
+:FreeLivingNematodes a owl:NamedIndividual , :NematodeDisease ;
+  :hasName "Free-living nematodes"@en ;
+  :hasAgentNote "Ditylenchus spp., Paratrichodorus spp., Pratylenchus spp., Trichodorus spp."@en .
+
+:PotatoCystNematodes a owl:NamedIndividual , :NematodeDisease ;
+  :hasName "Potato cyst nematodes"@en ;
+  :hasAgentNote "Globodera spp."@en .
+
+:RootKnotNematodes a owl:NamedIndividual , :NematodeDisease ;
+  :hasName "Root-knot nematodes"@en ;
+  :hasAgentNote "Meloidogyne spp."@en .
+
+:CoiledSprouts a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Coiled sprouts"@en .
+
+:FrostOrColdDamage a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Frost or cold damage"@en .
+
+:HaulmDestructionTreatment a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Haulm destruction treatment injury"@en .
+
+:HailDamage a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Hail damage"@en .
+
+:HeatDamage a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Heat damage"@en .
+
+:HerbicidePhytotoxicity a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Herbicide phytotoxicity"@en .
+
+:InternalBlackSpot a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Internal black spot"@en .
+
+:InternalSprouting a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Internal sprouting"@en .
+
+:LightningDamage a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Lightning damage"@en .
+
+:MechanicalDamageTubers a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Mechanical damage on tubers"@en .
+
+:MineralOilPhytotoxicity a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Phytotoxicity of mineral oil treatments"@en .
+
+:PressureBruising a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Pressure bruising"@en .
+
+:RainDamage a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Rain damage to plants or newly-lifted tubers"@en .
+
+:SeedTuberTreatmentInjury a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Seed tuber treatment injury"@en .
+
+:ShatterBruises a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Shatter bruises"@en .
+
+:Skinning a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Skinning"@en .
+
+:SproutingDisordersPhysAge a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Sprouting disorders due to physiological age"@en .
+
+:SunburnDamage a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Sunburn damage"@en .
+
+:StorageRotTreatment a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Treatment against storage rot diseases (injury risk)"@en .
+
+:SproutingInhibitorTreatment a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Treatment with sprouting inhibitors (chlorpropham)"@en .
+
+:WaterDamage a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Water damage"@en .
+
+:WindDamage a owl:NamedIndividual , :AccidentalDisorder ;
+  :hasName "Wind damage"@en .
+
+:EnlargedLenticels a owl:NamedIndividual , :ExternalPhysiologicalDisorder ;
+  :hasName "Enlarged lenticels"@en .
+
+:Greening a owl:NamedIndividual , :ExternalPhysiologicalDisorder ;
+  :hasName "Greening"@en .
+
+:SecondaryGrowthGlassyTubers a owl:NamedIndividual , :ExternalPhysiologicalDisorder ;
+  :hasName "Secondary growth: deformed and glassy tubers"@en .
+
+:TuberCracks a owl:NamedIndividual , :ExternalPhysiologicalDisorder ;
+  :hasName "Tuber cracks"@en .
+
+:BlackHeart a owl:NamedIndividual , :InternalPhysiologicalDisorder ;
+  :hasName "Black heart"@en .
+
+:BrownHeartHollowHeart a owl:NamedIndividual , :InternalPhysiologicalDisorder ;
+  :hasName "Brown heart and hollow heart"@en .
+
+:InternalRustSpot a owl:NamedIndividual , :InternalPhysiologicalDisorder ;
+  :hasName "Internal rust spot / internal brown spot"@en .
+
+:PinkPigmentationFleshSkin a owl:NamedIndividual , :InternalPhysiologicalDisorder ;
+  :hasName "Pink pigmentation of the flesh or of the skin"@en .
+
+:WhiteFleshImmatureTubers a owl:NamedIndividual , :InternalPhysiologicalDisorder ;
+  :hasName "White flesh and immature tubers"@en .
+
+:BoronDeficiency a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Boron deficiency"@en .
+
+:CalciumDeficiency a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Calcium deficiency"@en .
+
+:IronDeficiency a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Iron deficiency"@en .
+
+:MagnesiumDeficiency a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Magnesium deficiency"@en .
+
+:ManganeseDeficiency a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Manganese deficiency"@en .
+
+:NitrogenDeficiency a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Nitrogen deficiency"@en .
+
+:PhosphorusDeficiency a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Phosphorus deficiency"@en .
+
+:SalinityPhytotoxicity a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Salinity phytotoxicity"@en .
+
+:SulphurDeficiency a owl:NamedIndividual , :MineralDeficiencyDisorder ;
+  :hasName "Sulphur deficiency"@en .
+
+:BrownLeafSpot a owl:NamedIndividual , :LeafSymptom ;
+  :hasName "Brown leaf spot"@en ;
+  :hasDescription "Brown spots on leaves, may be concentric in early blight or water-soaked in late blight."@en ;
+  :indicatesDisease :EarlyBlight , :LateBlight .
+
+:WaterSoakedLesion a owl:NamedIndividual , :LeafSymptom ;
+  :hasName "Water-soaked lesion on leaf"@en ;
+  :hasDescription "Dark, water-soaked lesions on leaves typical of late blight."@en ;
+  :indicatesDisease :LateBlight .
+
+:WiltingStem a owl:NamedIndividual , :StemSymptom ;
+  :hasName "Wilting stem"@en ;
+  :hasDescription "Stems wilting, sometimes still green leaves but plants collapse."@en ;
+  :indicatesDisease :LateBlight , :BacterialWiltBrownRot .
+
+:BlackenedStemBase a owl:NamedIndividual , :StemSymptom ;
+  :hasName "Blackened stem base"@en ;
+  :hasDescription "Base of stems darkened and rotten, typical of blackleg."@en ;
+  :indicatesDisease :BlacklegSoftRot .
+
+:SoftTuberTissue a owl:NamedIndividual , :TuberSymptom ;
+  :hasName "Soft, foul-smelling tuber tissue"@en ;
+  :hasDescription "Soft, watery and foul smelling tuber rot, typical of soft rot."@en ;
+  :indicatesDisease :BlacklegSoftRot .
+
+:RoughScabbySkin a owl:NamedIndividual , :TuberSymptom ;
+  :hasName "Rough scabby skin"@en ;
+  :hasDescription "Rough, corky lesions on tuber surface typical of common scab."@en ;
+  :indicatesDisease :CommonScabNettedScab .
+
+:SilverSkinDiscoloration a owl:NamedIndividual , :TuberSymptom ;
+  :hasName "Silver discoloration of skin"@en ;
+  :hasDescription "Silvery patches on tuber skin associated with silver scurf."@en ;
+  :indicatesDisease :SilverScurf .
+
+:PowderyPustules a owl:NamedIndividual , :TuberSymptom ;
+  :hasName "Powdery pustules on tuber"@en ;
+  :hasDescription "Powdery pustules and scab-like lesions typical of powdery scab."@en ;
+  :indicatesDisease :PowderyScab .
+
+:LateBlightControl a owl:NamedIndividual , :ControlAction ;
+  :hasName "Late blight control"@en ;
+  :hasDescription "Use resistant varieties, certified seed, remove volunteer plants, apply fungicides according to extension recommendations, avoid prolonged leaf wetness."@en .
+
+:EarlyBlightControl a owl:NamedIndividual , :ControlAction ;
+  :hasName "Early blight control"@en ;
+  :hasDescription "Crop rotation, balanced fertilization, good canopy aeration, protectant fungicides when necessary."@en .
+
+:CommonScabControl a owl:NamedIndividual , :ControlAction ;
+  :hasName "Common scab control"@en ;
+  :hasDescription "Use certified seed, manage soil pH and moisture, avoid drought stress during tuber initiation."@en .
+
+:BlacklegControl a owl:NamedIndividual , :ControlAction ;
+  :hasName "Blackleg / soft rot control"@en ;
+  :hasDescription "Certified seed, careful handling to avoid wounds, sanitation of equipment, avoid excessive tuber wetness in storage."@en .
+
+:SilverScurfControl a owl:NamedIndividual , :ControlAction ;
+  :hasName "Silver scurf control"@en ;
+  :hasDescription "Use clean seed, avoid long storage, maintain low relative humidity and proper ventilation in storage."@en .
+
+:PowderyScabControl a owl:NamedIndividual , :ControlAction ;
+  :hasName "Powdery scab control"@en ;
+  :hasDescription "Use resistant varieties when available, manage soil moisture, avoid infested fields for seed production."@en .
+
+:PinkRotControl a owl:NamedIndividual , :ControlAction ;
+  :hasName "Pink rot control"@en ;
+  :hasDescription "Improve drainage, avoid waterlogged soils, use appropriate fungicide treatments on seed and in-furrow where recommended."@en .
+
+:LateBlight :hasControlAction :LateBlightControl .
+:EarlyBlight :hasControlAction :EarlyBlightControl .
+:CommonScabNettedScab :hasControlAction :CommonScabControl .
+:BlacklegSoftRot :hasControlAction :BlacklegControl .
+:SilverScurf :hasControlAction :SilverScurfControl .
+:PowderyScab :hasControlAction :PowderyScabControl .
+:PinkRot :hasControlAction :PinkRotControl .

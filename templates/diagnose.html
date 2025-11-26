@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Diagnosa Penyakit{% endblock %}
+
+{% block content %}
+<h2>Diagnosa Penyakit Kentang</h2>
+
+<form action="{{ url_for('diagnose') }}" method="post">
+    <p>Pilih gejala yang muncul pada tanaman kentang:</p>
+    <ul>
+        {% for s in symptoms %}
+        <li>
+            <label>
+                <input type="checkbox" name="symptoms" value="{{ s }}">
+                {{ s }}
+            </label>
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="submit">Diagnosa</button>
+</form>
+
+{% if result %}
+<h3>Hasil Diagnosa</h3>
+<ul>
+    {% for d in result %}
+    <li>{{ d }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

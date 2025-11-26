@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #ece8d9;
+    color: #3e3e2a;
+}
+
+.top-header {
+    background: #5f7f4a;
+    padding: 20px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.top-header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.top-header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.nav-bar {
+    background: #4d6738;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 12px 0;
+}
+
+.nav-bar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-bar a:hover {
+    text-decoration: underline;
+}
+
+.page-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.content-card {
+    background: #fffef5;
+    padding: 25px;
+    border-radius: 8px;
+    border: 2px solid #d4c9a4;
+}
+
+h2 {
+    color: #4f6b3b;
+    margin-top: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+ul li {
+    padding: 8px;
+    background: #f4f0dd;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    border: 1px solid #d3cbb2;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 50px;
+    background: #5f7f4a;
+    color: #fff;
+}
+
+.disease-list li a {
+    display: block;
+    padding: 10px;
+    background: #f9f5e4;
+    border-radius: 6px;
+    border: 1px solid #d9ceb0;
+}
+
+.disease-list li a:hover {
+    background: #efe6c8;
+}
