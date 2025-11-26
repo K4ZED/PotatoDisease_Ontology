@@ -7,12 +7,9 @@
     <h2>Daftar Penyakit Kentang</h2>
     <p>Pilih salah satu penyakit untuk melihat gejala yang terkait, atau gunakan menu diagnosa untuk mencari penyakit berdasarkan gejala yang muncul di tanaman.</p>
     <ul class="disease-list">
-        {% for iri in diseases %}
-        {% set raw = iri.split('#')[-1] %}
-        {% set words = raw | regex_replace('([A-Z])', ' \\1') %}
-        {% set name = words.strip() %}
+        {% for d in diseases %}
         <li>
-            <a href="{{ url_for('disease_detail', iri=iri) }}">{{ name }}</a>
+            <a href="{{ url_for('disease_detail', iri=d.iri) }}">{{ d.name }}</a>
         </li>
         {% endfor %}
     </ul>

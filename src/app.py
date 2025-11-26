@@ -13,9 +13,20 @@ graph = load_graph()
 app.register_blueprint(api)
 
 
+def pretty_label(iri: str) -> str:
+    local = iri.split("#")[-1]
+    result = []
+    for i, c in enumerate(local):
+        if i > 0 and c.isupper() and not local[i - 1].isupper():
+            result.append(" ")
+        result.append(c)
+    return "".join(result)
+
+
 @app.route("/")
 def index():
-    diseases = list_diseases(graph)
+    raw = list_diseases(graph)
+    diseases = [{"iri": iri, "name": pretty_label(iri)} for iri in raw]
     return render_template("index.html", diseases=diseases)
 
 
@@ -40,7 +51,8 @@ def diagnose():
             for d in diseases:
                 counts[d] = counts.get(d, 0) + 1
         result = [
-            d for d, _ in sorted(counts.items(), key=lambda x: x[1], reverse=True)
+            {"iri": d, "name": pretty_label(d), "score": score}
+            for d, score in sorted(counts.items(), key=lambda x: x[1], reverse=True)
         ]
     return render_template("diagnose.html", symptoms=all_symptoms, result=result)
 
