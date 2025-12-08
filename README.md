@@ -18,4 +18,8 @@ Pada tahap "Progress 2" ini, saya melakukan tambahan beberapa fungsi dan pembaru
 
 ## Progress 3: Deployment untuk Uji Coba
 
+Pada tahap "Progress 3" ini, saya melakukan deployment di vercel untuk dilakukannya uji coba terhadap user.
+
 <img width="1920" height="1080" alt="{6FBF2608-BF92-477F-BCDF-04309D79F0AF}" src="https://github.com/user-attachments/assets/c7660e02-96b0-4cdc-9783-a473034e72b3" />
+
+### Link : https://potato-disease-detector-five.vercel.app/
