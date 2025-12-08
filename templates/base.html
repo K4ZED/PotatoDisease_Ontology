@@ -2,32 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}Potato Disease Ontology{% endblock %}</title>
+    <title>Potato Disease Detector</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Web-based expert system for detecting potato diseases using knowledge-based reasoning.">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <span class="brand-title">Potato Disease Detector</span>
+                <span class="brand-subtitle">Knowledge-Based Diagnosis System</span>
+            </div>
+            <nav class="main-nav">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('diagnose_view') }}">Diagnose</a>
+            </nav>
+        </div>
+    </header>
 
-<header class="top-header">
-    <h1>Potato Disease Ontology</h1>
-    <p>Sistem Diagnosa Penyakit Kentang Berbasis Ontologi</p>
-</header>
+    <main class="site-main">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
 
-<nav class="nav-bar">
-    <a href="{{ url_for('index') }}">Beranda</a>
-    <a href="{{ url_for('diagnose') }}">Diagnosa</a>
-</nav>
+    <footer class="site-footer">
+        <div class="container">
+            <p class="footer-text">Potato Disease Detector · Knowledge-Based and Forward Chaining</p>
+        </div>
+    </footer>
 
-<main class="page-container">
-    <div class="content-card">
-        {% block content %}{% endblock %}
-    </div>
-</main>
-
-<footer class="footer">
-    <p>&copy; 2025</p>
-</footer>
-
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

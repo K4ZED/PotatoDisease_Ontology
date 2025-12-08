@@ -1,31 +1,67 @@
 {% extends "base.html" %}
 
-{% block title %}Diagnosa Penyakit{% endblock %}
-
 {% block content %}
-<h2>Diagnosa Penyakit Kentang</h2>
+<section class="page-section">
+    <h2 class="page-title">Potato Disease Diagnosis</h2>
+    <p class="page-subtitle">
+        Select the symptoms that match the current condition of your potato plants. The system will analyze them and suggest possible diseases and control actions.
+    </p>
 
-<form action="{{ url_for('diagnose') }}" method="post">
-    <p>Pilih gejala yang muncul pada tanaman kentang:</p>
-    <ul>
-        {% for s in symptoms %}
-        <li>
-            <label>
-                <input type="checkbox" name="symptoms" value="{{ s }}">
-                {{ s }}
-            </label>
-        </li>
-        {% endfor %}
-    </ul>
-    <button type="submit">Diagnosa</button>
-</form>
+    <form method="post" action="{{ url_for('diagnose_view') }}" class="diagnose-form">
+        {% if symptoms %}
+            <div class="symptom-groups">
+                <div class="symptom-group">
+                    <h3>Leaf Symptoms</h3>
+                    <div class="symptom-list">
+                        {% for symptom in symptoms if symptom.category == "LeafSymptom" %}
+                            <label class="symptom-item">
+                                <input type="checkbox" name="symptoms" value="{{ symptom.id }}">
+                                <span class="symptom-name">{{ symptom.name }}</span>
+                                {% if symptom.description %}
+                                    <span class="symptom-description">{{ symptom.description }}</span>
+                                {% endif %}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
 
-{% if result %}
-<h3>Hasil Diagnosa</h3>
-<ul>
-    {% for d in result %}
-    <li>{{ d }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+                <div class="symptom-group">
+                    <h3>Stem Symptoms</h3>
+                    <div class="symptom-list">
+                        {% for symptom in symptoms if symptom.category == "StemSymptom" %}
+                            <label class="symptom-item">
+                                <input type="checkbox" name="symptoms" value="{{ symptom.id }}">
+                                <span class="symptom-name">{{ symptom.name }}</span>
+                                {% if symptom.description %}
+                                    <span class="symptom-description">{{ symptom.description }}</span>
+                                {% endif %}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="symptom-group">
+                    <h3>Tuber Symptoms</h3>
+                    <div class="symptom-list">
+                        {% for symptom in symptoms if symptom.category == "TuberSymptom" %}
+                            <label class="symptom-item">
+                                <input type="checkbox" name="symptoms" value="{{ symptom.id }}">
+                                <span class="symptom-name">{{ symptom.name }}</span>
+                                {% if symptom.description %}
+                                    <span class="symptom-description">{{ symptom.description }}</span>
+                                {% endif %}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No symptoms are available from the knowledge base.</p>
+        {% endif %}
+
+        <div class="form-actions">
+            <button type="submit" class="primary-button">Run Diagnosis</button>
+        </div>
+    </form>
+</section>
 {% endblock %}

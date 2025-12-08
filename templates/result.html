@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+    <h2 class="page-title">Diagnosis Result</h2>
+
+    <div class="result-block">
+        <h3>Selected Symptoms</h3>
+        {% if result.selected_symptoms %}
+            <ul class="result-list">
+                {% for s in result.selected_symptoms %}
+                    <li>{{ s.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No symptoms selected.</p>
+        {% endif %}
+    </div>
+
+    <div class="result-block">
+        <h3>Possible Diseases</h3>
+        {% if result.diseases %}
+            <div class="disease-results">
+                {% for d in result.diseases %}
+                    <div class="disease-card">
+                        <h4 class="disease-name">{{ d.name }}</h4>
+                        <div class="disease-meta">
+                            <span class="meta-item">Type: {{ d.disease_type }}</span>
+                            {% if d.severity %}
+                                <span class="meta-item">Severity: {{ d.severity }}</span>
+                            {% endif %}
+                            <span class="meta-item">Matched Symptoms: {{ d.score }}</span>
+                        </div>
+
+                        {% if d.description %}
+                            <p class="disease-description">{{ d.description }}</p>
+                        {% endif %}
+
+                        {% if d.agent_note %}
+                            <p class="agent-note">{{ d.agent_note }}</p>
+                        {% endif %}
+
+                        <div class="supporting-symptoms">
+                            <h5>Supporting Symptoms</h5>
+                            <ul class="result-list">
+                                {% for s in d.symptoms %}
+                                    <li>{{ s.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        {% if d.control_actions %}
+                            <div class="control-actions">
+                                <h5>Control Actions</h5>
+                                <ul class="result-list">
+                                    {% for cid in d.control_actions %}
+                                        <li>{{ cid }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No diseases were inferred from the selected symptoms.</p>
+        {% endif %}
+    </div>
+
+    <div class="result-block">
+        <h3>Recommended Controls</h3>
+        {% if result.controls %}
+            <ul class="result-list">
+                {% for c in result.controls %}
+                    <li>
+                        <strong>{{ c.name }}</strong>: {{ c.description }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No specific control actions available.</p>
+        {% endif %}
+    </div>
+
+    <div class="form-actions">
+        <a href="{{ url_for('diagnose_view') }}" class="primary-button">Run Another Diagnosis</a>
+    </div>
+</section>
+{% endblock %}

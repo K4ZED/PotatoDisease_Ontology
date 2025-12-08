@@ -1,17 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}Daftar Penyakit{% endblock %}
-
 {% block content %}
-<section class="section">
-    <h2>Daftar Penyakit Kentang</h2>
-    <p>Pilih salah satu penyakit untuk melihat gejala yang terkait, atau gunakan menu diagnosa untuk mencari penyakit berdasarkan gejala yang muncul di tanaman.</p>
-    <ul class="disease-list">
-        {% for d in diseases %}
-        <li>
-            <a href="{{ url_for('disease_detail', iri=d.iri) }}">{{ d.name }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+<section class="hero-section">
+    <h2 class="page-title">Welcome to Potato Disease Detector</h2>
+    <p class="page-subtitle">A knowledge-based diagnostic system designed to identify potato diseases through forward chaining reasoning.</p>
+
+    <div class="hero-action">
+        <a href="{{ url_for('diagnose_view') }}" class="primary-button">Start Diagnosis</a>
+    </div>
+</section>
+
+<section class="info-section">
+    <h3>About This System</h3>
+    <p>
+        This system analyzes symptoms observed on potato plants and matches them with known disease patterns stored inside a structured knowledge base.
+        Using forward chaining, the system processes each symptom to infer the most likely diseases and the recommended control actions.
+    </p>
 </section>
 {% endblock %}
