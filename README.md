@@ -1,4 +1,4 @@
-# Potato Disease Ontology - Progress 1
+# Potato Disease Ontology
 
 ## Deskripsi Proyek
 
@@ -23,3 +23,4 @@ Pada tahap "Progress 3" ini, saya melakukan deployment di vercel untuk dilakukan
 <img width="1920" height="1080" alt="{6FBF2608-BF92-477F-BCDF-04309D79F0AF}" src="https://github.com/user-attachments/assets/c7660e02-96b0-4cdc-9783-a473034e72b3" />
 
 ### Link : https://potato-disease-detector-five.vercel.app/
+
