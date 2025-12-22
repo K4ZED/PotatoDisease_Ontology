@@ -17,20 +17,21 @@ def diagnose(selected_symptom_ids: List[str], knowledge: Dict[str, Any]) -> Dict
             continue
         matched_symptoms.append(symptom)
         for did in symptom.indicates:
+            if did not in diseases_by_id:
+                continue
             disease_scores[did] = disease_scores.get(did, 0) + 1
-            if did not in disease_symptoms:
-                disease_symptoms[did] = []
-            disease_symptoms[did].append(symptom)
+            disease_symptoms.setdefault(did, []).append(symptom)
 
-    ranked_diseases = sorted(disease_scores.items(), key=lambda x: x[1], reverse=True)
+    ranked_diseases = sorted(
+        disease_scores.items(),
+        key=lambda x: (-x[1], diseases_by_id[x[0]].name.lower()),
+    )
 
     diseases_result: List[Dict[str, Any]] = []
     control_ids_ordered: List[str] = []
 
     for did, score in ranked_diseases:
-        disease = diseases_by_id.get(did)
-        if not disease:
-            continue
+        disease = diseases_by_id[did]
         diseases_result.append(
             {
                 "id": disease.id,

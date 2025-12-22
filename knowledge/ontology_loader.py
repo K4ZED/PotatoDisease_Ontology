@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Dict, Any
 from rdflib import Graph, Namespace, RDF
+from owlrl import DeductiveClosure, OWLRL_Semantics
 
 POT = Namespace("http://example.org/potato#")
 
@@ -38,8 +39,20 @@ class ControlAction:
 def load_knowledge(path: str = "PotatoDisease.ttl") -> Dict[str, Any]:
     graph = Graph()
     graph.parse(path, format="turtle")
+    DeductiveClosure(OWLRL_Semantics).expand(graph)
 
     symptom_classes = [POT.LeafSymptom, POT.StemSymptom, POT.TuberSymptom]
+
+    symptoms: List[Symptom] = []
+    for cls in symptom_classes:
+        for s in set(graph.subjects(RDF.type, cls)):
+            sid = s.split("#")[-1]
+            name = str(next(graph.objects(s, POT.hasName), sid))
+            desc = str(next(graph.objects(s, POT.hasDescription), ""))
+            category = cls.split("#")[-1]
+            indicates = [o.split("#")[-1] for o in graph.objects(s, POT.indicatesDisease)]
+            symptoms.append(Symptom(sid, str(s), name, desc, category, indicates))
+
     disease_classes = [
         POT.FungalDisease,
         POT.BacterialDisease,
@@ -51,16 +64,6 @@ def load_knowledge(path: str = "PotatoDisease.ttl") -> Dict[str, Any]:
         POT.ExternalPhysiologicalDisorder,
         POT.InternalPhysiologicalDisorder,
     ]
-
-    symptoms: List[Symptom] = []
-    for cls in symptom_classes:
-        for s in graph.subjects(RDF.type, cls):
-            sid = s.split("#")[-1]
-            name = str(next(graph.objects(s, POT.hasName), sid))
-            desc = str(next(graph.objects(s, POT.hasDescription), ""))
-            category = cls.split("#")[-1]
-            indicates = [o.split("#")[-1] for o in graph.objects(s, POT.indicatesDisease)]
-            symptoms.append(Symptom(sid, str(s), name, desc, category, indicates))
 
     diseases: List[Disease] = []
     for s in set(graph.subjects(RDF.type, None)):
@@ -91,7 +94,7 @@ def load_knowledge(path: str = "PotatoDisease.ttl") -> Dict[str, Any]:
         )
 
     controls: List[ControlAction] = []
-    for s in graph.subjects(RDF.type, POT.ControlAction):
+    for s in set(graph.subjects(RDF.type, POT.ControlAction)):
         cid = s.split("#")[-1]
         name = str(next(graph.objects(s, POT.hasName), cid))
         desc = str(next(graph.objects(s, POT.hasDescription), ""))
